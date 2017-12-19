@@ -5,19 +5,21 @@
 #include "Config.h"
 #include "Control.h"
 
-char up_keys[]={"U"};
-char down_keys[]={"D"};
-char left_keys[]={"L"};
-char right_keys[]={"R"};
-char ent_keys[]={"B"};
-char esc_keys[]={"A"};
-char * function_keys[]={up_keys,down_keys,left_keys,right_keys,ent_keys,esc_keys};
+//char up_keys[]={"U"};
+//char down_keys[]={"D"};
+//char left_keys[]={"L"};
+//char right_keys[]={"R"};
+//char ent_keys[]={"B"};
+//char esc_keys[]={"A"};
+//char * function_keys[]={up_keys,down_keys,left_keys,right_keys,ent_keys,esc_keys};
 
-LiquidCrystal lcd(LCD_RS,LCD_EN,LCD_D4,LCD_D5,LCD_D6,LCD_D7);
-byte pins[]={my_btn_u,my_btn_d,my_btn_l,my_btn_r,my_btn_b,my_btn_a};
-char mapping[]={'U','D','L','R','B','A'};
-phi_button_groups* my_btns= new phi_button_groups(mapping, pins, total_buttons);
-multiple_button_input * keypads[]={my_btns, 0};
+LiquidCrystal* lcd;
+
+//byte pins[]={my_btn_u,my_btn_d,my_btn_l,my_btn_r,my_btn_b,my_btn_a};
+//char mapping[]={'U','D','L','R','B','A'};
+//phi_button_groups* my_btns= new phi_button_groups(mapping, pins, total_buttons);
+//multiple_button_input * keypads[]={my_btns, 0};
+phi_button_groups* my_btns;
 
 // This is the style of the menu
 // 101 == 01100101
@@ -64,14 +66,13 @@ bool menu_displayed=false;
 
 void (*currentDisplayHandler)();
 
-void initDisplayAndControls() {
-  lcd.begin(lcd_columns, lcd_rows);
-  lcd.noDisplay();
-  init_phi_prompt(&lcd, keypads, function_keys, lcd_columns, lcd_rows, '~');
-  initialiseSharedList();
-  Serial.println("Nums:");
-  Serial.println(sizeof(top_menu_items)/sizeof(top_menu_items[0]));
-  Serial.println(sizeof(controls_menu_items)/sizeof(controls_menu_items[0]));
+void initDisplayAndControls(LiquidCrystal* _lcd, phi_button_groups* btns, phi_prompt_struct* pps) {
+  lcd = _lcd;
+  my_btns = btns;
+  stuff_to_render = *pps;
+//  Serial.println("Nums:");
+//  Serial.println(sizeof(top_menu_items)/sizeof(top_menu_items[0]));
+//  Serial.println(sizeof(controls_menu_items)/sizeof(controls_menu_items[0]));
 }
 
 void topMenuHandler() {
@@ -334,25 +335,10 @@ void handleDisplay() {
   }
 }
 
-void initialiseSharedList() {
-//  phi_prompt_struct myMenu;
-//  myMenu.ptr.list=list; // Assign the list to the pointer
-  stuff_to_render.low.i=0; // Default item highlighted on the list
-//  myMenu.high.i=list_size; // Last item of the list is size of the list - 1.
-  stuff_to_render.width=lcd_columns-((global_style&phi_prompt_arrow_dot)!=0)-((global_style&phi_prompt_scroll_bar)!=0); // Auto fit the size of the list to the screen. Length in characters of the longest list item.
-  stuff_to_render.step.c_arr[0]=lcd_rows-1; // rows to auto fit entire screen
-  stuff_to_render.step.c_arr[1]=1; // one col list
-  stuff_to_render.step.c_arr[2]=0; // y for additional feature such as an index
-  stuff_to_render.step.c_arr[3]=lcd_columns-4-((global_style&phi_prompt_index_list)!=0); // x for additional feature such as an index
-  stuff_to_render.col=0; // Display menu at column 0
-  stuff_to_render.row=1; // Display menu at row 1
-  stuff_to_render.option=global_style; // Option 0, display classic list, option 1, display 2X2 list, option 2, display list with index, option 3, display list with index2.
-}
-
 void updateMenuTitleList(char* title, char** list, int list_size, void (*handler)()) {
-  lcd.display();
-  lcd.clear();
-  lcd.noBlink();
+  lcd->display();
+  lcd->clear();
+  lcd->noBlink();
   center_text(title);
   stuff_to_render.ptr.list=list;
   stuff_to_render.low.i=0; // Default item highlighted on the list
@@ -363,8 +349,8 @@ void updateMenuTitleList(char* title, char** list, int list_size, void (*handler
 
 void exitMenu() {
   currentDisplayHandler=0;
-  lcd.clear();
-  lcd.noDisplay();
+  lcd->clear();
+  lcd->noDisplay();
   menu_displayed=false;
 }
 //

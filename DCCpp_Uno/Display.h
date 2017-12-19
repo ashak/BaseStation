@@ -1,16 +1,12 @@
 #include <phi_interfaces.h>
+#include <phi_prompt.h>
+#include <LiquidCrystal.h>
 
 #define phi_prompt_sense_select_list_escape -1
 #define phi_prompt_sense_select_list_enter 1
 #define phi_prompt_sense_select_list_left -2
 #define phi_prompt_sense_select_list_right -3
 
-#define LCD_RS 31
-#define LCD_EN 30
-#define LCD_D4 29
-#define LCD_D5 28
-#define LCD_D6 27
-#define LCD_D7 26
 #define lcd_rows 4
 #define lcd_columns 20
 #define total_buttons 6
@@ -30,7 +26,7 @@
 //byte render=1;
 //int last_button_press=NO_KEY;
 
-void initDisplayAndControls();
+void initDisplayAndControls(LiquidCrystal*, phi_button_groups*, phi_prompt_struct*);
 void handleDisplay();
 void initialiseSharedList();
 void updateMenuTitleList(char*, char* [], int, void (*handler)());

@@ -178,8 +178,7 @@ DCC++ BASE STATION is configured through the Config.h file that contains all use
 #include "Config.h"
 #include "Comm.h"
 #if CONTROLSTATION_ENABLE == 1
-#include "Control.h"
-#include "Display.h"
+#include "ControlStation.h"
 #endif
 
 void showConfiguration();
@@ -216,8 +215,7 @@ void loop(){
   Sensor::check();    // check sensors for activate/de-activate
   
   #if CONTROLSTATION_ENABLE == 1
-  handleControlChanges();
-  handleDisplay();
+    ControlStation::update();
   #endif
 } // loop
 
@@ -231,9 +229,7 @@ void setup(){
   Serial.flush();
 
   #if CONTROLSTATION_ENABLE == 1
-  initDisplayAndControls();
-  initControls(&mainRegs, 21);
-  enableControl(1, 8, 22, A15);
+    ControlStation::initialise(&mainRegs);
   #endif
 
   #ifdef SDCARD_CS
