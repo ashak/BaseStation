@@ -17,6 +17,7 @@ MenuSystem::MenuSystem(LiquidCrystal* lcd, phi_prompt_struct* phi_prompt_struct_
 }
 
 void MenuSystem::handleDisplayAndDisplayControls() {
+//Serial.println("handleDisplayAndDisplayControls");
   if (currently_displayed_menu) {
     Menu* ret_menu = currently_displayed_menu->handler(current_phi_prompt_struct);
     if(ret_menu!=currently_displayed_menu) {
@@ -35,15 +36,12 @@ void MenuSystem::handleDisplayAndDisplayControls() {
       switchToMenu(start_menu);
     }
   }
+//Serial.println("/handleDisplayAndDisplayControls");
 }
 
 void MenuSystem::setStartMenu(Menu* start_menu) {
   this->start_menu=start_menu;
 }
-
-//Menu* MenuSystem::addMenu(char* title, int num_items) {
-//  return new Menu(title, num_items);
-//}
 
 void MenuSystem::initialisePhiPrompt() {
   init_phi_prompt(lcd, keypads, function_keys, lcd_columns, lcd_rows, '~');
@@ -68,13 +66,15 @@ void MenuSystem::initialisePhiPromptStruct(phi_prompt_struct* phi_prompt_struct_
 }
 
 void MenuSystem::prepareDisplay() {
+  Serial.println("prepareDisplay");
   lcd->display();
   lcd->clear();  
   lcd->noBlink();
-  Serial.println("Prepared display");
+  Serial.println("/prepareDisplay");
 }
 
 void MenuSystem::switchBackToMenu(Menu* menu) {
+Serial.println("SwitchBackToMenu");
   if(currently_displayed_menu->getParent()) {
     currently_displayed_menu->setParent(NULL);
     currently_displayed_menu = menu;
@@ -84,14 +84,16 @@ void MenuSystem::switchBackToMenu(Menu* menu) {
     lcd->clear();
     lcd->noDisplay();
   }
+Serial.println("/SwitchBackToMenu");
 }
 
 void MenuSystem::switchToMenu(Menu* menu) {
+Serial.println("SwitchToMenu");
   if(currently_displayed_menu) {
     menu->setParent(currently_displayed_menu);
   }
   currently_displayed_menu = menu;
   currently_displayed_menu->prepare(current_phi_prompt_struct);
-  Serial.println("Switched to menu");
+Serial.println("/SwitchToMenu");
 }
 

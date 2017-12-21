@@ -35,7 +35,6 @@ class MenuSystem {
     MenuSystem(LiquidCrystal*, phi_prompt_struct*);
     void handleDisplayAndDisplayControls();
     void setStartMenu(Menu*);
-//    void addMenu(char*);
   private:
     void initialisePhiPrompt();
     void initialisePhiPromptStruct();
