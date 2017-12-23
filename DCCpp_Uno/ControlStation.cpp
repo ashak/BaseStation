@@ -23,8 +23,11 @@ static void ControlStation::initialise(volatile RegisterList* mainRegs) {
   new MenuItemLoadParentMenu(controls_menu, "Exit");
   menu_system->setStartMenu(settings_menu);
 
-  initControls(mainRegs, 21);
-  enableControl(1, 8, 22, A15);
+  initControls(mainRegs, 19);
+  enableControl(1, 8, 15, A8);
+  enableControl(2, 20, 16, A9);
+  enableControl(3, 4, 17, A10);
+  enableControl(4, 97, 18, A11);
 Serial.println(controls_menu->getTitle());
 }
 

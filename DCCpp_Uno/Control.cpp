@@ -8,7 +8,7 @@ volatile RegisterList *mRegs;
 Control *controls[MAX_MAIN_REGISTERS-1];
 bool control_enabled[MAX_MAIN_REGISTERS-1];
 char control_mapping[]={'P'}; // This is a list of names for button
-byte control_pins[]={21};
+byte control_pins[]={19};
 phi_button_groups control_btns(control_mapping, control_pins, 1);
 //phi_button_groups *control_btns;
 
