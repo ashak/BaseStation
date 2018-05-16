@@ -6,15 +6,15 @@ Menu::Menu(char* title, int num_items) {
   this->num_menu_items = num_items;
   this->menu_items = calloc(num_items, sizeof(Menu*));
   this->prepared_menu_items = nullptr;
-  this->added_network_items = 0;
+  this->added_menu_items = 0;
   this->force_render = false;
 }
 
 void Menu::addMenuItem(MenuItem* menu_item) {
-  if (added_network_items < num_menu_items) {
-    menu_items[added_network_items] = menu_item;
+  if (added_menu_items < num_menu_items) {
+    menu_items[added_menu_items] = menu_item;
   }
-  added_network_items++;
+  added_menu_items++;
 }
 
 void Menu::setForceRender() {

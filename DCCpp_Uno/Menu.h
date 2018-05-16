@@ -16,13 +16,13 @@ class Menu {
     Menu* Menu::getParent();
     char* Menu::getTitle();
     Menu* Menu::handler(phi_prompt_struct*);
-    void Menu::prepare(phi_prompt_struct*);
+    virtual void Menu::prepare(phi_prompt_struct*);
     void Menu::setParent(Menu*);
     void Menu::updateMenuItems();
   private:
     char** Menu::prepareMenuItems();
 
-    int added_network_items;
+    int added_menu_items;
     bool force_render;
     int num_menu_items;
     char* title;

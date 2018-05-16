@@ -1,8 +1,18 @@
 #ifndef MENU_SYSTEM_H
 #define MENU_SYSTEM_H
-#include "Display.h"
+//#include "Display.h"
 #include <LiquidCrystal.h>
 #include "Menu.h"
+// TODO: Do these belong here?
+#define lcd_rows 4
+#define lcd_columns 20
+#define total_buttons 6
+#define my_btn_u 32
+#define my_btn_d 33
+#define my_btn_l 34
+#define my_btn_r 35
+#define my_btn_b 36
+#define my_btn_a 37
 static char up_keys[]={"U"};
 static char down_keys[]={"D"};
 static char left_keys[]={"L"};

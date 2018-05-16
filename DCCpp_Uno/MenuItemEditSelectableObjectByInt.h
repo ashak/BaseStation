@@ -1,6 +1,7 @@
 #ifndef MENU_ITEM_EDIT_SELECTABLE_OBJECT_BY_INT_H
 #define MENU_ITEM_EDIT_SELECTABLE_OBJECT_BY_INT_H
 #include "Menu.h"
+#include "MenuEditObject.h"
 #include "MenuItem.h"
 class MenuItemEditSelectableObjectByInt: public MenuItem {
   private:
@@ -12,7 +13,7 @@ class MenuItemEditSelectableObjectByInt: public MenuItem {
     void increase(int*);
 
   public:
-    MenuItemEditSelectableObjectByInt::MenuItemEditSelectableObjectByInt(Menu*, char*, int);
+    MenuItemEditSelectableObjectByInt::MenuItemEditSelectableObjectByInt(Menu*, MenuEditObject*, char*, int);
     Menu* MenuItemEditSelectableObjectByInt::handler(int);
     char* MenuItemEditSelectableObjectByInt::getTitle();
 };

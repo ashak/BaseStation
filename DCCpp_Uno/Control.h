@@ -1,3 +1,5 @@
+#ifndef CONTROL_H
+#define CONTROL_H
 #include "Arduino.h"
 #include "PacketRegister.h"
 #include "Config.h"
@@ -24,4 +26,4 @@ Control* createControl();
 Control** getControls();
 void enableControl(int, int, int, int);
 void handleControlChanges();
-
+#endif

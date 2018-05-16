@@ -60,6 +60,6 @@ Part of DCC++ BASE STATION for the Arduino
 //
 
 #define CONTROLSTATION_ENABLE   1
-
+#define CONTROLSTATION_MENU_ENABLE 0
 /////////////////////////////////////////////////////////////////////////////////////
 

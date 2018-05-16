@@ -5,7 +5,7 @@ MenuSystem::MenuSystem(LiquidCrystal* lcd) {
   this->currently_displayed_menu=NULL;
   initialisePhiPrompt();
   initialisePhiPromptStruct();
-  initDisplayAndControls(lcd, my_btns, current_phi_prompt_struct);
+//  initDisplayAndControls(lcd, my_btns, current_phi_prompt_struct);
 }
 
 MenuSystem::MenuSystem(LiquidCrystal* lcd, phi_prompt_struct* phi_prompt_struct_p) {
@@ -13,7 +13,7 @@ MenuSystem::MenuSystem(LiquidCrystal* lcd, phi_prompt_struct* phi_prompt_struct_
   this->currently_displayed_menu=NULL;
   initialisePhiPrompt();
   initialisePhiPromptStruct(phi_prompt_struct_p);
-  initDisplayAndControls(lcd, my_btns, current_phi_prompt_struct);
+ // initDisplayAndControls(lcd, my_btns, current_phi_prompt_struct);
 }
 
 void MenuSystem::handleDisplayAndDisplayControls() {

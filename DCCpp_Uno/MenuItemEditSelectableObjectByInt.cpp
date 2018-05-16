@@ -1,13 +1,14 @@
 #include "MenuItemEditSelectableObjectByInt.h"
 MenuItemEditSelectableObjectByInt::MenuItemEditSelectableObjectByInt(
   Menu* menu,
+  MenuEditObject* next_menu,
   char* fmt,
   int title_size
 ) : MenuItem::MenuItem(
   menu,
   fmt
 ) {
-//  this->next=next_menu;
+  this->next=next_menu;
   this->title_size = title_size;
   this->edittable_int = 0;
   this->actual_title = nullptr;
@@ -38,6 +39,7 @@ Serial.println(edittable_int);
 
     case phi_prompt_sense_select_list_enter:
     Serial.println("returning new menu");
+//    this->next->initialiseEdittableObject(edittable_int);
     return this->next;
     break;
   }
